@@ -14,7 +14,7 @@ export const getProducts = (_req: Request, res: Response, next: NextFunction) =>
 
 export const createProduct = (req: Request, res: Response, next: NextFunction) => {
   Product.create(req.body)
-    .then((product) => res.send(product))
+    .then((product) => res.status(201).send(product))
     .catch((error) => {
       if (error instanceof MongooseError.ValidationError) {
         return next(

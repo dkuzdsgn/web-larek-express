@@ -50,4 +50,56 @@ const validateProductBody = celebrate({
   }),
 });
 
-export default validateProductBody;
+export enum PaymentType {
+  Card = 'card',
+  Online = 'online',
+}
+
+const validateOrderBody = celebrate({
+  [Segments.BODY]: Joi.object({
+    payment: Joi.string()
+      .valid(...Object.values(PaymentType))
+      .required()
+      .messages({
+        'any.only': 'Некорректное значение payment',
+        'any.required': 'Поле payment обязательно',
+      }),
+
+    email: Joi.string()
+      .email()
+      .required()
+      .messages({
+        'string.email': 'Некорректный email',
+        'any.required': 'Поле email обязательно',
+      }),
+
+    phone: Joi.string()
+      .required()
+      .messages({
+        'any.required': 'Поле phone обязательно',
+      }),
+
+    address: Joi.string()
+      .required()
+      .messages({
+        'any.required': 'Поле address обязательно',
+      }),
+
+    total: Joi.number()
+      .required()
+      .messages({
+        'any.required': 'Поле total обязательно',
+      }),
+
+    items: Joi.array()
+      .items(Joi.string().hex().length(24))
+      .min(1)
+      .required()
+      .messages({
+        'array.min': 'Поле items не может быть пустым',
+        'any.required': 'Поле items обязательно',
+      }),
+  }),
+});
+
+export { validateProductBody, validateOrderBody };

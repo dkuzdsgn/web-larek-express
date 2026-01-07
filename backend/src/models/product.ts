@@ -1,6 +1,7 @@
-import mongoose from 'mongoose';
+import mongoose, { Types } from 'mongoose';
 
 export interface IProduct {
+  _id: Types.ObjectId;
   title: string;
   image: {
     fileName: string;
