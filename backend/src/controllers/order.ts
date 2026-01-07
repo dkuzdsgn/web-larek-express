@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { faker } from '@faker-js/faker';
 
-export const createOrder = (req: Request, res: Response) => {
+const createOrder = (req: Request, res: Response) => {
   const { total } = req.body;
 
   Promise.resolve()
@@ -16,3 +16,4 @@ export const createOrder = (req: Request, res: Response) => {
     });
 };
 
+export default createOrder;

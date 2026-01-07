@@ -1,6 +1,6 @@
 import { celebrate, Joi, Segments } from 'celebrate';
 
-export const validateProductBody = celebrate({
+const validateProductBody = celebrate({
   [Segments.BODY]: Joi.object({
     title: Joi.string()
       .min(2)
@@ -49,3 +49,5 @@ export const validateProductBody = celebrate({
       }),
   }),
 });
+
+export default validateProductBody;
